@@ -1,8 +1,9 @@
 import {Client} from "pg";
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 //     const client = new Client({
-//         connectionString : "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
 //     })
 //     client.connect();
 
@@ -24,7 +25,7 @@ import {Client} from "pg";
 
 async function insertData() {
     const client = new Client({
-            connectionString : "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
+            connectionString : process.env.postgress_url
 
     });
   
@@ -38,17 +39,12 @@ async function insertData() {
     } finally {
       await client.end(); // Close the client connection
     }
-
-
-
-
-   
 }
 // insertData();
 
 async function getUser(email: string) {
     const client = new Client({
-        connectionString : "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
+        connectionString : process.env.postgress_url
 
     });
     

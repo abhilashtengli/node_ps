@@ -8,10 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const pg_1 = require("pg");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 //     const client = new Client({
-//         connectionString : "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
 //     })
 //     client.connect();
 // async function createUsersTable () {
@@ -30,7 +34,7 @@ const pg_1 = require("pg");
 function insertData() {
     return __awaiter(this, void 0, void 0, function* () {
         const client = new pg_1.Client({
-            connectionString: "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
+            connectionString: process.env.postgress_url
         });
         try {
             yield client.connect(); // Ensure client connection is established
@@ -50,7 +54,7 @@ function insertData() {
 function getUser(email) {
     return __awaiter(this, void 0, void 0, function* () {
         const client = new pg_1.Client({
-            connectionString: "postgresql://practise_owner:z60DafuUoYPr@ep-jolly-scene-a1109q12.ap-southeast-1.aws.neon.tech/practise?sslmode=require"
+            connectionString: process.env.postgress_url
         });
         yield client.connect(); // Ensure client connection is established
         const query = 'SELECT * FROM users WHERE email = $1';
@@ -67,4 +71,4 @@ function getUser(email) {
     });
 }
 // Example usage
-getUser('user2@example.com').catch(console.error);
+getUser('user3@example.com').catch(console.error);
